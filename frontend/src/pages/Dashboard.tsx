@@ -9,6 +9,10 @@ export default function Dashboard() {
     const [url, setUrl] = useState('')
     const { urls, loading, error, createShortUrl } = useUrl()
     const [copiedId, setCopiedId] = useState<string | null>(null)
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, "") ?? ""
+    const shortUrlBase = apiBaseUrl
+        ? (apiBaseUrl.endsWith("/api") ? `${apiBaseUrl}/url` : `${apiBaseUrl}/api/url`)
+        : `${window.location.origin}/api/url`
     const [currentPage, setCurrentPage] = useState(1)
     const pageSize = 5
     const totalPages = Math.ceil(urls.length / pageSize)
@@ -146,7 +150,7 @@ export default function Dashboard() {
                         <>
                             <div className="space-y-3">
                                 {paginatedUrls.map((item) => {
-                                    const shortUrl = `${window.location.origin}/${item.shortId}`
+                                    const shortUrl = `${shortUrlBase}/${item.shortId}`
                                     return (
                                         <div
                                             key={item._id}
