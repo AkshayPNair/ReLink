@@ -21,6 +21,8 @@ export default function Dashboard() {
 
     const handleSignOut = () => {
         localStorage.removeItem("accessToken")
+        // Dispatch custom event to update authentication state
+        window.dispatchEvent(new Event('authChange'))
         navigate('/login')
     }
 
