@@ -56,7 +56,7 @@ export default function Dashboard() {
     }
 
     const copyToClipboard = async (shortCode: string, id: string) => {
-        const shortUrl = `${window.location.origin}/${shortCode}`
+        const shortUrl = `${shortUrlBase}/${shortCode}`
         await navigator.clipboard.writeText(shortUrl)
         setCopiedId(id)
         setTimeout(() => setCopiedId(null), 2000)
