@@ -14,5 +14,6 @@ const urlController= new UrlController(urlService)
 router.post("/shorten",authMiddleware,(req,res,next)=>urlController.createShortUrl(req,res,next))
 router.get("/my-urls",authMiddleware,(req,res,next)=>urlController.getUserUrls(req,res,next))
 router.get("/:shortId",(req,res,next)=>urlController.redirect(req,res,next))
+router.delete("/:shortId", authMiddleware, (req, res, next) => urlController.deleteUrl(req, res, next))
 
 export default router

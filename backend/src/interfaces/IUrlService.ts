@@ -10,4 +10,5 @@ export interface IUrlService{
     createShortUrl(originalUrl:string,userId:string):Promise<CreateShortUrlResponse>;
     getUserUrls(userId:string):Promise<IUrl[]>;
     redirect(shortId:string):Promise<string>;
+    deleteUrl(shortId: string, userId: string): Promise<void>;
 }

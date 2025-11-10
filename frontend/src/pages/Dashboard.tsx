@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useUrl } from "../hooks/useUrl"
-import { Link2, LogOut, Copy, Check, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Link2, Trash2, LogOut, Copy, Check, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import { toast } from "react-toastify"
 
 export default function Dashboard() {
     const navigate = useNavigate()
     const [url, setUrl] = useState('')
-    const { urls, loading, error, createShortUrl } = useUrl()
+    const { urls, loading, error, createShortUrl, deleteUrl } = useUrl()
     const [copiedId, setCopiedId] = useState<string | null>(null)
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, "") ?? ""
     const shortUrlBase = apiBaseUrl
@@ -196,6 +196,17 @@ export default function Dashboard() {
                                                                 <span className="text-sm font-medium">Copy</span>
                                                             </>
                                                         )}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            if (item.shortId) {
+                                                                deleteUrl(item.shortId);
+                                                            }
+                                                        }}
+                                                        className="flex items-center space-x-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-all"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                        <span className="text-sm font-medium">Delete</span>
                                                     </button>
                                                 </div>
                                             </div>

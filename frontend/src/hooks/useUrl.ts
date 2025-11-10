@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
-import { createShortUrl as createUrl, getUserUrls as getUrls } from "../api/urlService"
+import { createShortUrl as createUrl, getUserUrls as getUrls, deleteUrl as deleteUrlApi } from "../api/urlService"
 
 interface IUrl {
     _id?: string
@@ -55,6 +55,28 @@ export const useUrl = () => {
         }
     }
 
+    const deleteUrl=async (shortId:string)=>{
+        try {
+            setLoading(true);
+            setError(null);
+            await deleteUrlApi(shortId);
+            setUrls((prev) => prev.filter((url) => url.shortId !== shortId));
+            toast.success("URL deleted successfully!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        } catch (err: any) {
+            const errorMsg = err.response?.data?.message || "Failed to delete URL";
+            setError(errorMsg);
+            toast.error(errorMsg, {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        } finally {
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         fetchUrls()
     }, [])
@@ -65,5 +87,6 @@ export const useUrl = () => {
         error,
         createShortUrl,
         fetchUrls,
+        deleteUrl
     }
 }

@@ -19,6 +19,12 @@ api.interceptors.response.use(
         if (error.response?.data?.message) {
             error.message = error.response.data.message;
         }
+        if (error.response?.status === 401) {
+            // Token expired or invalid, redirect to login
+            localStorage.removeItem("accessToken");
+            window.dispatchEvent(new Event('authChange'));
+            window.location.href = '/login';
+        }
         return Promise.reject(error);
     }
 );

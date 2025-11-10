@@ -54,4 +54,18 @@ export class UrlController{
             }
         }
     }
+    async deleteUrl(req:Request,res:Response,next: NextFunction){
+        try {
+            const { shortId } = req.params;
+            const userId = (req as any).user.id;
+            await this._urlService.deleteUrl(shortId, userId);
+            res.status(StatusCodes.OK).json({ message: "URL deleted successfully" });
+        } catch (error) {
+            if (error instanceof AppError) {
+                res.status(error.status || StatusCodes.BAD_REQUEST).json({ message: error.message, code: error.code });
+            } else {
+                next(error);
+            }
+        }
+    }
 }
