@@ -36,7 +36,7 @@ It allows users to register, log in, and shorten long URLs into simple, shareabl
 ---
 
 ## 🧱 Folder Structure
-
+```bash
 akshaypnair-relink/
 ├── backend/
 │   ├── src/
@@ -95,7 +95,7 @@ akshaypnair-relink/
     │       └── Register.tsx
     ├── package.json
     └── vite.config.ts
-
+```
 
 ---
 
