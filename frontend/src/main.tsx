@@ -1,4 +1,5 @@
 import { StrictMode } from 'react'
+import { BrowserRouter } from "react-router-dom";
 import { createRoot } from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -7,6 +8,7 @@ import './index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <BrowserRouter>
     <ToastContainer
       position="top-right"
       autoClose={3000}
@@ -19,5 +21,6 @@ createRoot(document.getElementById('root')!).render(
       pauseOnHover
     />
     <App />
+    </BrowserRouter>
   </StrictMode>,
 )
